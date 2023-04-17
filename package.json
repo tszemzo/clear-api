@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "IS_TEST=true mocha \"./src/**/*.test.js\"",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "docker:down": "docker compose down -v",
@@ -13,7 +13,10 @@
   "author": "Tomas <szemzotomas@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.22",
+    "sinon": "^15.0.3"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

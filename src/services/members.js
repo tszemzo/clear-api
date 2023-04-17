@@ -25,17 +25,13 @@ async function createMember({ name, email, phone, clientId }) {
   return member.save();
 }
 
-async function createNote(id, note) {
-  const member = await getMemberById(id);
-  if (!member) {
-    throw new Error('Member does not exist');
-  }
+function createNote(member, note) {
+  const newNote = {
+    note,
+    date: new Date(),
+  };
 
-  if (_.size(member.notes) > MAX_NOTES) {
-    throw new Error(`Maximum number of notes (${MAX_NOTES}) reached`);
-  }
-
-  member.notes.push({ note, date: new Date() });
+  member.notes.push(newNote);
   return member.save();
 }
 
