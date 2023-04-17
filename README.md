@@ -40,3 +40,9 @@ Finally we need to run the API with `npm start`.
 To run the tests just use the command `npm run test`.
 
 ## Additional comments
+
+A few improvals that may be added in the future:
+- More testing
+- More logging
+- Middleware for permissions and permissions/roles (e.g. who can edit/remove/create a member, etc...)
+- Better and customizable Error / Error messages
