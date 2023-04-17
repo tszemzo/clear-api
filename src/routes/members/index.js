@@ -6,6 +6,7 @@ const membersController = require('../../controllers/members');
 
 /* ****** route definitions ****** */
 router.post('/create', createMember);
+router.post('/:id/create-note', createNote);
 router.get('/:id', getMember);
 router.put('/:id', editMember);
 router.put('/:id/change-client', changeClient)
@@ -22,6 +23,18 @@ async function createMember(req, res) {
       phone,
       clientId
     });
+    res.status(201).send(response);
+  } catch (err) {
+    logger.error(err.message);
+    res.status(500).send({ error: err.message });
+  }
+}
+
+async function createNote(req, res) {
+  try {
+    const memberId = _.get(req, 'params.id');
+    const { note } = req.body;
+    const response = await membersController.createNote(memberId, note);
     res.status(201).send(response);
   } catch (err) {
     logger.error(err.message);

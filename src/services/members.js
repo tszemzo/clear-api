@@ -1,8 +1,11 @@
 const _ = require('lodash');
+
 const { Member } = require('../models/member');
+const { MAX_NOTES } = require('../utils/constants');
 
 const self = {
   createMember,
+  createNote,
   getMemberByEmail,
   getMemberById,
   editMember,
@@ -19,6 +22,20 @@ async function createMember({ name, email, phone, clientId }) {
     clientId,
   });
 
+  return member.save();
+}
+
+async function createNote(id, note) {
+  const member = await getMemberById(id);
+  if (!member) {
+    throw new Error('Member does not exist');
+  }
+
+  if (_.size(member.notes) > MAX_NOTES) {
+    throw new Error(`Maximum number of notes (${MAX_NOTES}) reached`);
+  }
+
+  member.notes.push({ note, date: new Date() });
   return member.save();
 }
 

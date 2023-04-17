@@ -3,9 +3,11 @@ const _ = require('lodash');
 const membersService = require('../services/members');
 const clientsService = require('../services/clients');
 const { validateEmail } = require('../utils/validator');
+const { MAX_NOTE_LENGTH } = require('../utils/constants');
 
 const self = {
   createMember,
+  createNote,
   changeClient,
   getMember,
   editMember,
@@ -39,6 +41,18 @@ async function createMember({ name, email, phone, clientId }) {
     phone,
     clientId
   });
+};
+
+async function createNote(memberId, note) {
+  if (!memberId || !note) {
+    throw new Error('Invalid data. Member ID and note are required');
+  }
+
+  if (_.size(note) > MAX_NOTE_LENGTH) {
+    throw new Error(`Note is too long. Maximum length is ${MAX_NOTE_LENGTH} characters`);
+  }
+
+  return membersService.createNote(memberId, note);
 };
 
 async function changeClient(id, newClientId) {

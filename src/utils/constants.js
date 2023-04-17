@@ -3,6 +3,11 @@ const CLIENT_TYPE = Object.freeze({
   PUBLIC: 'public',
 });
 
+const MAX_NOTES = 30;
+const MAX_NOTE_LENGTH = 1000;
+
 module.exports = {
   CLIENT_TYPE,
+  MAX_NOTES,
+  MAX_NOTE_LENGTH
 };

@@ -13,6 +13,9 @@ const memberSchema = new mongoose.Schema({
   phone: {
     type: String,
   },
+  notes: {
+    type: Array,
+  },
   clientId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Client',
