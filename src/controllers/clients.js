@@ -81,7 +81,7 @@ async function editClient(id, fields) {
   return clientsService.editClient(id, fields);
 }
 
-async function deleteClient(id) {
+function deleteClient(id) {
   if (!id) {
     throw new Error('Client ID is required');
   }
