@@ -43,8 +43,8 @@ async function createClient({ companyName, address, city, state, zip, headcount 
   });
 };
 
-function getClients() {
-  return clientsService.getClients();
+function getClients(fields) {
+  return clientsService.getClients(fields);
 }
 
 async function getClient(id) {

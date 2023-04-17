@@ -26,8 +26,11 @@ async function createClient({ companyName, address, city, state, zip, headcount 
   return client.save();
 }
 
-function getClients() {
-  return Client.find();
+function getClients({ companyName, state }) {
+  return Client.find({
+    companyName: new RegExp(companyName, 'i'), // case insensitive
+    state: !_.isNil(state) ? state : /.*/, // if state is undefined, return all states
+  });
 }
 
 function getClientById(id) {

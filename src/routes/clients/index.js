@@ -34,7 +34,11 @@ async function createClient(req, res) {
 
 async function getClients(req, res) {
   try {
-    const clients = await clientsController.getClients();
+    const { companyName, state } = req.query;    
+    const clients = await clientsController.getClients({
+      companyName,
+      state,
+    });
     res.status(200).json(clients);
   } catch (err) {
     logger.error(err.message);
